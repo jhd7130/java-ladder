@@ -27,17 +27,9 @@ public class Lambda {
     }
 
     public static int sumAllEvenWithCondition(List<Integer> numbers, Conditional conditional) {
-        int total = 0;
-        for (int number : numbers) {
-            total = sumOrNot(conditional, number, total);
-        }
-        return total;
-    }
-
-    private static int sumOrNot(Conditional conditional, int number, int total) {
-        if (conditional.condition(number)) {
-            total += number;
-        }
-        return total;
+        return numbers.stream()
+                        .filter(conditional::condition)
+                        .mapToInt(it -> it)
+                        .sum();
     }
 }
